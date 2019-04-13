@@ -16,6 +16,23 @@ $export BOOST_HOME=/PATH/TO/BOOST
 
 ## Tensor format
 
+Download tensors from:
+
+http://frostt.io
+
+## Install benchmark
+
+$ install.sh
+
+Steps to manually install the benchmarks are at manual_install.sh
+
+## run benchmark
+
+$ run_benchmark.sh
+
+
+##Example
+
 The dataset starts with number of dimension followed by length of each dimension in the next line. E.g.,
 example.tns  
 3  
