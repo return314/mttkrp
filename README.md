@@ -1,3 +1,15 @@
+## Requirements:
+
+1. OpenBLAS-0.2.20
+2. Boost-1.67.0
+
+## Set environment variable:
+
+1. set path for openBLAS
+export OPENBLAS_HOME=/PATH/TO/OPENBLAS
+2. set path for Boost
+export BOOST_HOME=/PATH/TO/BOOST
+
 ## Tensor format
 
 The dataset starts with number of dimension followed by length of each dimension in the next line. E.g.,

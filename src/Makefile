@@ -2,12 +2,14 @@ CXX=g++
 # CXX=icc
 NVCC=nvcc
 NVCC_LIB_PATH=/usr/lib/x86_64-linux-gnu
-# pitzer
-BOOSTFLAG=-L/apps/boost/intel/18.0/1.67.0/lib -I/apps/boost/intel/18.0/1.67.0/include 
+
+# /apps/boost/intel/18.0/1.67.0
+BOOSTFLAG=-L${BOOST_HOME}/lib -I${BOOST_HOME}/include 
 # BOOSTFLAG=-L/usr/local/boost/gnu/7.3/1.67.0/lib -I/usr/local/boost/gnu/7.3/1.67.0/include
 
-LAPACK_LIB_PATH=/PATH/TO/OpenBLAS/lib/
-LAPACK_INCLUDE_PATH=/PATH/TO/OpenBLAS/include/
+
+LAPACK_LIB_PATH=${OPENBLAS_HOME}/lib/
+LAPACK_INCLUDE_PATH=${OPENBLAS_HOME}/include/
 BLAS_INCLUDE_PATH=
 
 CXXFLAGS=-O3 -std=c++11 -fopenmp -I${LAPACK_INCLUDE_PATH} -I${BLAS_INCLUDE_PATH} -DADD_  $(BOOSTFLAG)

@@ -43,7 +43,6 @@ int MTTKRP_HYB_CPU(HYBTensor &HybX, Matrix *U, Options &Opt);
 
 int MTTKRP_HYB_CPU_4D(HYBTensor &HybX, Matrix *U, Options &Opt);
 
-//Aravind optimized
 int MTTKRP_HCSR_CPU_ASR(const Tensor &X, Matrix *U, ITYPE mode, ITYPE R);
 
 int MTTKRP_TILED_HCSR_CPU(TiledTensor *TiledX, Matrix *U, const Options &Opt);
