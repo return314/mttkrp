@@ -4,6 +4,7 @@
 2. Boost-1.67.0
 3. NVCC-9.2
 4. GCC-7.3.0
+5. CMake (>v3.2)
 
 ## Set environment variable:
 

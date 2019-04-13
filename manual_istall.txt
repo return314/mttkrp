@@ -1,0 +1,30 @@
+ 
+# Install SPLATT LIBRARY
+
+1. Download git repository from 
+https://github.com/ShadenSmith/splatt
+
+2. Building & Installing
+
+Run configure with the following BLAS and LAPACK flags:
+
+ ./configure --precision=single --with-blas-lib=<lib>
+    Set the BLAS library (e.g., /usr/.../libblas.so).
+  --with-lapack-lib=<lib>
+    Set the LAPACK library (e.g., /usr/.../liblapack.so).
+
+./configure --precision=single --with-blas-lib=${LAPACK_LIB_PATH}/lib/libopenblas_haswellp-r0.3.6.dev.so --with-lapack-lib=${LAPACK_LIB_PATH}/lib/libopenblas_haswellp-r0.3.6.dev.so 
+
+$make
+
+
+
+# Install ParTI LIBRARY
+
+1. Download git repository from 
+
+https://github.com/hpcgarage/ParTI
+
+2. Building & Installing
+
+./build.sh
