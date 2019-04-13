@@ -6,9 +6,12 @@
 ## Set environment variable:
 
 1. set path for openBLAS
-export OPENBLAS_HOME=/PATH/TO/OPENBLAS
+
+$export OPENBLAS_HOME=/PATH/TO/OPENBLAS
+
 2. set path for Boost
-export BOOST_HOME=/PATH/TO/BOOST
+
+$export BOOST_HOME=/PATH/TO/BOOST
 
 ## Tensor format
 
