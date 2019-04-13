@@ -2,17 +2,20 @@
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${OPENBLAS_HOME}/lib
 
-# artifact_home=~/SC19_artifact/mttkrp
-artifact_home=/users/PAS0134/osu1600/test
-path=~/SC19_artifact/mttkrp/datasets
+artifact_home=~/SC19_new_artifact/mttkrp
+path=$artifact_home/datasets
 out=$artifact_home/output.txt
 
-declare -a dataset=("nell-2")
-
+# declare -a dataset=("nell-2")
+declare -a dataset=("3d_3_8")
 # declare -a dataset=("delicious-3d" "nell-1" "nell-2" "flickr-3d" "freebase_music" "freebase_sampled" "1998DARPA")
 rank=32
 
 for tsr_name in "${dataset[@]}"; do
+
+	sk=7
+	sb=7
+	nnz=8
 
 	if [ ${tsr_name} = "delicious-3d" ]; then
 		nnz=140126181
@@ -51,17 +54,17 @@ for tsr_name in "${dataset[@]}"; do
 
 	echo $dataset >> $out
 
-	# echo "running MM-CSF"
-	bin=$artifact_home/MM-CSF/mttkrp
-	$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 12 -f 128 -w 1 -s 8 -b 256 &> mm_tmp
-	mode1Time=`cat mm_tmp | grep 'mode\ 0' | awk -F':' '{print $2}' |  awk -F',' '{print $1}'`
-	mode2Time=`cat mm_tmp | grep 'mode\ 1' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
-	mode3Time=`cat mm_tmp | grep 'mode\ 2' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
+	# # echo "running MM-CSF"
+	# bin=$artifact_home/MM-CSF/mttkrp
+	# $bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 12 -f 128 -w 1 -s 8 -b 256 &> mm_tmp
+	# mode1Time=`cat mm_tmp | grep 'mode\ 0' | awk -F':' '{print $2}' |  awk -F',' '{print $1}'`
+	# mode2Time=`cat mm_tmp | grep 'mode\ 1' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
+	# mode3Time=`cat mm_tmp | grep 'mode\ 2' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
 
-	totTime=`echo "$mode1Time + $mode2Time + $mode3Time" | bc -l`
-	log1=`echo "$totTime * 1" | bc -l`
-	GFLOPS=`echo "9 * $rank * $nnz / ($log1 * 1000000)" | bc -l`
-	echo "MM-CSF,GFLOPS - $GFLOPS" >> $out	
+	# totTime=`echo "$mode1Time + $mode2Time + $mode3Time" | bc -l`
+	# log1=`echo "$totTime * 1" | bc -l`
+	# GFLOPS=`echo "9 * $rank * $nnz / ($log1 * 1000000)" | bc -l`
+	# echo "MM-CSF,GFLOPS - $GFLOPS" >> $out	
 
 	# bin=$artifact_home/B-CSF/src/mttkrp
 	# log1=`$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 8 -f 128 | perl -p -e 's/\n//'`
