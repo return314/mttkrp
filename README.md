@@ -2,15 +2,15 @@
 
 1. OpenBLAS-0.2.20
 2. Boost-1.67.0
+3. NVCC-9.2
+4. GCC-7.3.0
 
 ## Set environment variable:
 
 1. set path for openBLAS
-
 $export OPENBLAS_HOME=/PATH/TO/OPENBLAS
 
 2. set path for Boost
-
 $export BOOST_HOME=/PATH/TO/BOOST
 
 ## Tensor format
