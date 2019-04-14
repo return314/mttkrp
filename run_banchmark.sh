@@ -55,20 +55,24 @@ for tsr_name in "${dataset[@]}"; do
 	echo $dataset >> $out
 
 	# echo "running MM-CSF"
-	bin=$artifact_home/MM-CSF/mttkrp
-	$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 12 -f 128 -w 1 -s 8 -b 256 &> mm_tmp
-	mode1Time=`cat mm_tmp | grep 'mode\ 0' | awk -F':' '{print $2}' |  awk -F',' '{print $1}'`
-	mode2Time=`cat mm_tmp | grep 'mode\ 1' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
-	mode3Time=`cat mm_tmp | grep 'mode\ 2' | awk -F':' '{print $2}' |  awk -F' ' '{print $1}'`
-
-	totTime=`echo "$mode1Time + $mode2Time + $mode3Time" | bc -l`
-	log1=`echo "$totTime * 1" | bc -l`
+	bin=$artifact_home/MM-CSF/mttkrp	
+	TotTime=`$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 12 -f 128 -w 1 -s 8 -b 256 `
+	log1=`echo $TotTime | awk -F':' '{print $2}'`
 	GFLOPS=`echo "9 * $rank * $nnz / ($log1 * 1000000)" | bc -l`
 	echo "MM-CSF,GFLOPS - $GFLOPS" >> $out	
 
 	bin=$artifact_home/B-CSF/src/mttkrp
-	log1=`$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 8 -f 128 | perl -p -e 's/\n//'`
-	echo "B-CSF,$dataset,$log1" >> $out
+	mode1T=`$bin -i $path/"$tsr_name"_wDims.tns -m 0 -R $rank -t 8 -f 128 | perl -p -e 's/\n//'`
+	mode2T=`$bin -i $path/"$tsr_name"_wDims.tns -m 1 -R $rank -t 8 -f 128 | perl -p -e 's/\n//'`
+	mode3T=`$bin -i $path/"$tsr_name"_wDims.tns -m 2 -R $rank -t 8 -f 128 | perl -p -e 's/\n//'`
+	
+	mode1Time=`echo ${mode1T: : -1} | awk -F':' '{print $3}'`
+	mode2Time=`echo ${mode1T: : -1} | awk -F':' '{print $3}'`
+	mode3Time=`echo ${mode1T: : -1} | awk -F':' '{print $3}'`
+
+	log1=`echo "$mode1Time + $mode2Time + $mode3Time" | bc -l`
+	GFLOPS=`echo "9 * $rank * $nnz / ($log1 * 1000000)" | bc -l`
+	echo "B-CSF,GFLOPS - $GFLOPS" >> $out
 
 # SPLATT ALL-CSF
 	echo "Processing SPLATT (ALL-CSF)"
