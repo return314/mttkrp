@@ -276,7 +276,7 @@ int main(int argc, char* argv[]){
         //mm_partition_allMode(arrX, X, ModeWiseTiledX, Opt);
         mm_partition_reuseBased(arrX, X, ModeWiseTiledX, Opt);
         populate_paritions(X, ModeWiseTiledX);
-        printf("mm_partition & populate - time: %.3f sec \n", seconds() - t0);
+        // printf("mm_partition & populate - time: %.3f sec \n", seconds() - t0);
         
         t0 = seconds();
         double start_time = omp_get_wtime();
@@ -302,7 +302,7 @@ int main(int argc, char* argv[]){
         }
         double omp_time = omp_get_wtime() - start_time;
 
-        printf("Sort,createCSF,createFbrIND - time: %.3f sec, %g \n", seconds() - t0, omp_time);
+        // printf("Sort,createCSF,createFbrIND - time: %.3f sec, %g \n", seconds() - t0, omp_time);
 
         /* on CPU */
         if(Opt.impType == 11){ 

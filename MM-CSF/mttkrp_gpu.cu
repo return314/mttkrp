@@ -3400,7 +3400,7 @@ int MTTKRP_MIHCSR_GPU(TiledTensor *TiledX, Matrix *U, const Options &Opt){
 				cout << endl;
 			}   
 		}
-		cout << "MI-HCSR-GPU-mode "<< MTTKRPmode <<" : " << GPUTime << "," << endl;
+		// cout << "MI-HCSR-GPU-mode "<< MTTKRPmode <<" : " << GPUTime << "," << endl;
 		allModeGPUTime += GPUTime; 
 	}
 	int totalMIslics = 0, totalMIfibers = 0, totalMInnz = 0;;
@@ -3412,9 +3412,10 @@ int MTTKRP_MIHCSR_GPU(TiledTensor *TiledX, Matrix *U, const Options &Opt){
 		}
 	}
 
-	cout << "Total GPU time: " << allModeGPUTime << ", nnz:" << totalMInnz 
-			<< ", nFibers:" << totalMIfibers << ", nSlc:" << totalMIslics 
-			<< endl;
+	cout << "MM-CSF time: " << allModeGPUTime << endl;
+	// ", nnz:" << totalMInnz 
+			// << ", nFibers:" << totalMIfibers << ", nSlc:" << totalMIslics 
+			// << endl;
 
 	for (int bin = 0; bin < Opt.nBin; ++bin)
 		cudaStreamDestroy(streams[bin]);
@@ -3691,7 +3692,7 @@ int MTTKRP_MIHCSR_GPU_oneMode_forCPD(TiledTensor *TiledX, Matrix *U, const Optio
 
 	if(iter == Opt.cpdIters - 1 && cpdMode == TiledX[0].ndims - 1)
 	{
-		cout << "Freeing variable " << endl;
+		// cout << "Freeing variable " << endl;
 		cudaFree(dVals); 
 		cudaFree(dU); //cudaFree(dU1); cudaFree(dU2); cudaFree(dU3);
 		cudaFree(dfbrIdx0); cudaFree(dInds2); cudaFree(dInds3); 
