@@ -9,6 +9,7 @@ out=$artifact_home/output.txt
 # declare -a dataset=("nell-2")
 # declare -a dataset=("3d_3_8")
 declare -a dataset=("delicious-3d" "nell-1" "nell-2" "flickr-3d" "freebase_music" "freebase_sampled" "1998DARPA")
+
 rank=32
 
 for tsr_name in "${dataset[@]}"; do
