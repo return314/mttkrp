@@ -4,7 +4,7 @@ NVCC=nvcc
 NVCC_LIB_PATH=/usr/lib/x86_64-linux-gnu
 
 # /apps/boost/intel/18.0/1.67.0
-BOOSTFLAG=-L${BOOST_HOME}/lib -I${BOOST_HOME}/include 
+BOOSTFLAG=-L${BOOST_HOME}/libs -I${BOOST_HOME}
 # BOOSTFLAG=-L/usr/local/boost/gnu/7.3/1.67.0/lib -I/usr/local/boost/gnu/7.3/1.67.0/include
 
 
@@ -15,8 +15,6 @@ BLAS_INCLUDE_PATH=
 CXXFLAGS=-O3 -std=c++11 -fopenmp -I${LAPACK_INCLUDE_PATH} -I${BLAS_INCLUDE_PATH} -DADD_  $(BOOSTFLAG)
 CXXLINKFLAGS=-L${LAPACK_LIB_PATH} -lopenblas
 
-MPIFLAGS = -I/opt/mvapich2/intel/18.0/2.3/include
-MPILINKFLAGS=-L/opt/mvapich2/intel/18.0/2.3/lib -lmpi
 
 NVCCFLAGS += -O3 -w -gencode arch=compute_70,code=sm_70 -Xptxas -dlcm=ca -Xcompiler -fopenmp --std=c++11 -m64 -lineinfo $(BOOSTFLAG)  -I${LAPACK_INCLUDE_PATH} -I${BLAS_INCLUDE_PATH} -DADD_ 
 NVCCLINKFLAGS = -L$(NVCC_LIB_PATH) -lcudart
@@ -24,16 +22,16 @@ NVCCLINKFLAGS = -L$(NVCC_LIB_PATH) -lcudart
 all: mttkrp ttm cpd
 
 cpd: cpd.cu cpd_cpu.o mttkrp_cpu.h clapack.h mttkrp_cpu.o mttkrp_gpu.o 
-	${NVCC} ${NVCCFLAGS} -o cpd cpd_cpu.o mttkrp_cpu.o mttkrp_gpu.o cpd.cu $(NVCCLINKFLAGS) ${CXXLINKFLAGS} ${MPIFLAGS} ${MPILINKFLAGS}
+	${NVCC} ${NVCCFLAGS} -o cpd cpd_cpu.o mttkrp_cpu.o mttkrp_gpu.o cpd.cu $(NVCCLINKFLAGS) ${CXXLINKFLAGS} 
 
 ttm: ttm.cu ttm_cpu.o ttm_gpu.o 
 	${NVCC} ${NVCCFLAGS} -o ttm ttm_cpu.o ttm_gpu.o ttm.cu $(NVCCLINKFLAGS)  
 
 mttkrp: mttkrp.cu mttkrp_cpu.o mttkrp_gpu.o cpd_cpu.o clapack.h
-	${NVCC} ${NVCCFLAGS} ${MPIFLAGS} ${MPILINKFLAGS} -o mttkrp mttkrp_cpu.o mttkrp_gpu.o cpd_cpu.o mttkrp.cu $(NVCCLINKFLAGS) ${CXXLINKFLAGS} 
+	${NVCC} ${NVCCFLAGS} -o mttkrp mttkrp_cpu.o mttkrp_gpu.o cpd_cpu.o mttkrp.cu $(NVCCLINKFLAGS) ${CXXLINKFLAGS} 
 
-mttkrp_gpu.o: mttkrp_gpu.h mttkrp_gpu.cu util.h mttkrp_mpi.h
-	${NVCC} ${NVCCFLAGS} ${MPIFLAGS} ${MPILINKFLAGS} -c -o mttkrp_gpu.o mttkrp_gpu.cu $(NVCCLINKFLAGS)  
+mttkrp_gpu.o: mttkrp_gpu.h mttkrp_gpu.cu util.h 
+	${NVCC} ${NVCCFLAGS} -c -o mttkrp_gpu.o mttkrp_gpu.cu $(NVCCLINKFLAGS)  
 
 mttkrp_cpu.o: mttkrp_cpu.h mttkrp_cpu.cpp util.h
 	${CXX} ${CXXFLAGS} -c -o mttkrp_cpu.o mttkrp_cpu.cpp
