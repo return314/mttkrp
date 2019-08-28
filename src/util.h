@@ -3256,10 +3256,11 @@ inline double seconds(){
 
 inline void print_help_and_exit() {
     printf("options:\n\
-        -R rank/feature : set the rank (default 32)\n\
-        -m mode : set the mode of MTTKRP (default 0)\n\
-        -t implementation type: 1: COO CPU, 2: HCSR CPU, 3: COO GPU 4: HCSR GPU (default 1)\n\
+        -R rank/feature: set the rank (default 32)\n\
+        -m mode: set the mode of MTTKRP (default 0)\n\
+        -t implementation type: 1: COO CPU, 2: HCSR CPU, 3: COO GPU 4: HCSR GPU  8: B-CSF 10: HB-CSF 12: MM-CSF (default 1)\n\
         -w warp per slice: set number of WARPs assign to per slice  (default 4)\n\
+        -f nnz per fiber: set number of nonzeros assign to per fiber  (default 128)\n\
         -i output file name: e.g., ../dataset/delicious.tns \n\
         -o output file name: if not set not output file will be written\n");
        
