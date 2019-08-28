@@ -37,7 +37,7 @@ An example of a 3x3x3 tensor - toy.tns:
 
 $ make  
 
-# Run examples
+## Run examples
 
 $ src/mttkrp [options]
 
@@ -70,7 +70,7 @@ Steps to manually install the benchmarks are at manual_install.sh
 
 Step are described in How_To_Download.txt
 
-## run benchmark
+## Run benchmark
 
 Please run the following script to run the benchmarks:
 
