@@ -37,18 +37,18 @@ An example of a 3x3x3 tensor - toy.tns:
 
 $ make  
 
-# Run examples:
+# Run examples
 
 $ src/mttkrp [options]
 
 Avaiable options:
--R rank/feature: set the rank (default 32)
--m mode: set the mode of MTTKRP (default 0)
--t implementation type: 1: COO CPU, 2: HCSR CPU, 3: COO GPU 4: HCSR GPU  8: B-CSF 10: HB-CSF 12: MM-CSF (default 1)
--w warp per slice: set number of WARPs assign to per slice  (default 4)
--f nnz per fiber: set number of nonzeros assign to per fiber (default 128)
--i output file name: e.g., toy.tns
--o output file name: if not set not output file will be written
+-R rank/feature: set the rank (default 32)  
+-m mode: set the mode of MTTKRP (default 0)  
+-t implementation type: 1: COO CPU, 2: HCSR CPU, 3: COO GPU 4: HCSR GPU  8: B-CSF 10: HB-CSF 12: MM-CSF (default 1)  
+-w warp per slice: set number of WARPs assign to per slice  (default 4)  
+-f nnz per fiber: set number of nonzeros assign to per fiber (default 128)  
+-i output file name: e.g., toy.tns  
+-o output file name: if not set not output file will be written  
         
 Example:
 $ src/mttkrp -i toy.tns -m 0 -R 32 -t 12 -f 128 -w 1 -s 8 -b 256
