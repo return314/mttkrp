@@ -1,4 +1,4 @@
-An Efficient Mixed-Mode Representation (MM-CSF) of Sparse Tensors (SC'19)
+An Efficient Mixed-Mode Representation (MM-CSF) of Sparse Tensors (SC'19).  
 For updated code please visit https://github.com/isratnisa/MM-CSF
 
 ## Requirements:
@@ -41,16 +41,17 @@ $ make
 
 $ src/mttkrp [options]
 
-Avaiable options:
+Avaiable options:  
 -R rank/feature: set the rank (default 32)  
 -m mode: set the mode of MTTKRP (default 0)  
 -t implementation type: 1: COO CPU, 2: HCSR CPU, 3: COO GPU 4: HCSR GPU  8: B-CSF 10: HB-CSF 12: MM-CSF (default 1)  
--w warp per slice: set number of WARPs assign to per slice  (default 4)  
--f nnz per fiber: set number of nonzeros assign to per fiber (default 128)  
+-w warp per slice: set number of WARPs per slice  (default 4)  
+-f nnz per fiber: set number of nonzeros per fiber (default 128)  
 -i output file name: e.g., toy.tns  
--o output file name: if not set not output file will be written  
+-o output file name: if not set no output file will be written  
         
 Example:
+
 $ src/mttkrp -i toy.tns -m 0 -R 32 -t 12 -f 128 -w 1 -s 8 -b 256
 
 To see all the options: 
